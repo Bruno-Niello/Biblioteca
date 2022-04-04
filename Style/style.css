@@ -1,0 +1,249 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: #ffffff;
+  background-image: url(/Media/fondo.jpg);
+  background-repeat: repeat-x;
+}
+
+.encabezado {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: 1 / 1 / 2 / 3;
+}
+
+.pie {
+  -ms-grid-row: 5;
+  -ms-grid-row-span: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: 5 / 1 / 6 / 3;
+}
+
+.main {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 2;
+  grid-area: 2 / 1 / 5 / 3;
+}
+
+.seccion1 {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-area: 2 / 1 / 5 / 2;
+}
+
+.seccion2 {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-area: 2 / 2 / 5 / 3;
+}
+
+.grid-container {
+  color: #031F4F;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1.4fr 0.6fr;
+      grid-template-rows: 1fr 1fr 1fr 1.4fr 0.6fr;
+  grid-auto-columns: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  font: normal 16px "BIZ UDPMincho", serif;
+  width: 90%;
+  margin: auto;
+}
+
+.grid-container ul {
+  list-style: none;
+}
+
+.grid-container ul a {
+  color: #031F4F;
+  text-decoration: none;
+}
+
+.grid-container .encabezado {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  background-color: white;
+  border: solid #031F4F 2px;
+}
+
+.grid-container .encabezado #logo {
+  width: 150px;
+  height: 150px;
+}
+
+.grid-container .encabezado .titulo_biblioteca {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #031F4F;
+  font-size: 36px;
+  font-weight: bold;
+  width: 800px;
+  height: 150px;
+  background-color: white;
+}
+
+.grid-container .main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.grid-container .main .seccion1 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 30px;
+  padding: 30px;
+}
+
+.grid-container .main .seccion1 #explorar {
+  color: #031F4F;
+  margin: 15px;
+  font-size: 30px;
+  font-weight: bolder;
+  background-color: white;
+}
+
+.grid-container .main .seccion1 .estanteria {
+  margin: 10px;
+  border: solid 2px #031F4F;
+  width: 200px;
+  height: 30px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: white;
+}
+
+.grid-container .main .seccion2 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 50%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 30px;
+}
+
+.grid-container .main .seccion2 .pasos {
+  margin: 10px;
+  padding: 20px;
+  width: 200px;
+  height: 30px;
+  border: solid 2px #031F4F;
+  border-radius: 40px;
+  background-color: white;
+}
+
+.grid-container .main .seccion2 #instrucciones {
+  background-color: white;
+  margin: 10px;
+  padding: 20px;
+  width: 50%;
+  font-style: italic;
+  font-size: 14px;
+  border: #031F4F 2px dashed;
+}
+
+.grid-container .pie {
+  color: #031F4F;
+  text-align: center;
+  padding: 20px;
+  margin: 0px;
+  background-color: white;
+  border: 1px solid #031F4F;
+}
+
+.grid-container .pie .evita {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px;
+  margin: 5px;
+}
+
+.grid-container .pie .evita #evita_name {
+  margin: 10px;
+}
+
+.grid-container .pie #github {
+  list-style: none;
+  text-decoration: none;
+}
+
+.grid-container .pie #github #niello {
+  font-style: italic;
+  color: #031F4F;
+}
+/*# sourceMappingURL=style.css.map */

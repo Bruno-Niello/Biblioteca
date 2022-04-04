@@ -1,0 +1,142 @@
+@import "variables";
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    @include fondo;
+}
+
+.encabezado { grid-area: 1 / 1 / 2 / 3; }
+  
+.pie { grid-area: 5 / 1 / 6 / 3; }
+  
+.main { grid-area: 2 / 1 / 5 / 3; }
+  
+.seccion1 { grid-area: 2 / 1 / 5 / 2; }
+  
+.seccion2 { grid-area: 2 / 2 / 5 / 3; }
+  
+.grid-container {  
+    color: $color;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1.4fr 0.6fr;
+    grid-auto-columns: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    font: $fuente;
+    width: 90%;
+    margin:auto;
+    ul{
+        list-style: none;
+        a{
+            color: $color;
+            text-decoration: none;}}
+    .encabezado{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        background-color: white;
+        border: solid $color 2px;
+        #logo{
+            width: 150px;
+            height: 150px;
+        }  
+        .titulo_biblioteca{ 
+            display: flex;
+            align-items: center;
+            color: $color;
+            font-size: 36px;
+            font-weight: bold;
+            width: 800px;
+            height: 150px;
+            background-color: white;
+        } 
+
+    }
+    .main{
+        display: flex;
+        flex-direction: row;
+        .seccion1{
+            @include secciones;
+            // background-color: orange;
+            margin: 30px;
+            padding: 30px;
+            #explorar{
+                color: $color;
+                margin: 15px;
+                font-size: 30px;
+                font-weight: bolder;
+                background-color: white;
+            }
+            .estanteria{
+                margin: 10px;
+                border: solid 2px $color;
+                width: 200px;
+                height: 30px;
+                text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: white;
+            }
+        }
+        .seccion2{
+            @include secciones;
+            margin: 30px;
+            .pasos{
+                margin: 10px;
+                padding: 20px;
+                width: 200px;
+                height: 30px;
+                border: solid 2px $color;
+                border-radius: 40px;
+                background-color: white;
+            }
+            #instrucciones{
+                background-color: white;
+                margin: 10px;
+                padding: 20px;
+                width: 50%;
+                font-style: italic;
+                font-size: 14px;
+                border: $color 2px dashed;
+            }
+        }   
+    }
+    .pie{
+        color: #031F4F;
+        text-align: center;
+        padding: 20px;
+        margin: 0px;
+        background-color: white;
+        border: 1px solid $color;
+        .evita{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            margin: 5px;
+            #evita_name{
+                margin: 10px;
+            }
+        }
+        #github{
+            list-style: none;
+            text-decoration: none;
+            #niello{
+            font-style: italic;
+            color: $color;
+            }
+        }
+    }
+    
+    
+
+}
+
