@@ -60,8 +60,15 @@ const nombresLibros = estanterias.map((el) => el.titulo); //map de nobmres de li
 
 
 
+let nombreUsuario = document.getElementById("nombre").value; 
 
+const guardarUsuario = () => {
+    this.usuario = document.getElementById("user");
 
+    let userNuevo = new Usuario(nombre);
+
+    Usuarios.push(userNuevo);
+}
 
 
 
