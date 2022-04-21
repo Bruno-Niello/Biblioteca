@@ -31,8 +31,15 @@ class Prestamo {
 
                 //  VARIABLES //
 
-                
-let pregunta = prompt("hola! soy un buscardor inteligente a su servcio, describa el tamaño del libro que desea: corto o largo, en caso de querer ver todo la coleccion escriba 'catalogo'");
+//DOM
+    //ventanas emergentes
+        //filtro de busqueda
+        const filtro = document.querySelector("#filtro"); //boton para abrir la ventana filtro
+        const emergenteFiltro = document.querySelector("#ventanaFiltro"); //venta emergente filtro 
+        const cerrar = document.querySelector(".cerrar"); //boton de cerrar
+        const ventanas = document.querySelector(".ventanas"); //contenedor ventana
+        const resultado = document.querySelector("#resultado"); //area de resultados
+        const botonBuscar = document.querySelector("#botonBuscar"); //boton formulario
 
 
 
@@ -49,55 +56,49 @@ estanterias.push(new Libro("la republica", "platon", "gredos", 600));
 estanterias.push(new Libro("el extranjero", "albert camus", "atalaya", 184));
 estanterias.push(new Libro("Las aventuras de Tom Sawyer", "mark twain", "anaya", 142));
 
-usuarios.push(new Usuario("bruno niello", "brunoniello@gmail.com", 3498460438));
 
 const filtroLargo = estanterias.filter((el) => el.paginas > 200)
 const filtroCorto = estanterias.filter((el) => el.paginas < 200)
 const nombresLibros = estanterias.map((el) => el.titulo); 
 
 
-// SIMULADOR BUSCADORES 
 
-switch(pregunta){
-    case "largo":
-        console.log(filtroLargo);
-        alert(`abra la consola (f12) para ver nuestro catalogo`);
-        break;
-    case "corto":
-        console.log(filtroCorto);
-        alert(`abra la consola (f12) para ver nuestro catalogo`);
-        break;
-    case "catalogo":
-        console.log(nombresLibros);
-        alert(`abra la consola (f12) para ver nuestro catalogo`);
-        break;
-    default: 
-        alert("dato invalido");
-        break;
+const pregunta = () => {
+   
+    const busqueda = document.querySelector("#buscadorFiltro").value;
+    if(busqueda == "largo"){
+        resultado.innerText = JSON.stringify(filtroLargo);
+    }
+    if(busqueda == "corto"){
+        resultado.innerText = JSON.stringify(filtroCorto);
+    }
+    if(busqueda == "catalogo"){
+        resultado.innerText = nombresLibros;
+    }
+    // else{
+    //     resultado.innerText = "no escribio una palabra valida";
+    // }
 }
-
+//por algun motivo el ELSE me rompe el filtro largo y corto!!!
 
 
                 //  EVENTOS // 
 
 
+const emergente1 = (URL) => {
+    window.open(URL, "ventana", "width=500, height=300,scrollbars=NO")
+}
 
+botonBuscar.onclick = (e)=>{
+    e.preventDefault();
+    pregunta();}
 
-                // SIMULADOR // 
-
-
-// agregarUser = () => {
-//     let nombreUser = prompt("cual es su nombre");
-//     let mailUser = prompt("cual es su mail?");
-//     let numeroCelUser = parseInt(prompt("cual es su numero de celular?"));
-//     let user = new Usuario(nombreUser, mailUser, numeroCelUser);
-//     usuarios.push(user);
-// }
-
-
-
-
-
+filtro.onclick = () => {
+    ventanas.classList.add("mostrar");
+}
+cerrar.onclick = () => {
+    ventanas.classList.remove("mostrar");
+}
 
 
 
@@ -134,15 +135,6 @@ switch(pregunta){
 
 
 
-// let nombreUsuario = document.getElementById("nombre").value; 
-
-// const guardarUsuario = () => {
-//     this.usuario = document.getElementById("user");
-
-//     let userNuevo = new Usuario(nombre);
-
-//     Usuarios.push(userNuevo);
-// }
 
 
 
@@ -153,21 +145,10 @@ switch(pregunta){
 
 
 
-                
-//ingreso de usuario 
-// while (pass != dato) {
-//     if (intentos > 0) {
-//         intentos--; 
-//         alert(`contraseña es erronea. te quedan ${intentos} intentos`);
-//         dato = parseInt(prompt("cual es tu contraseña?"));
-//     } else {
-//         alert("no quedan intentos");
-//         break;
-//     }
-// }
-// let pass = 1234567890;
-// let dato = parseInt(prompt("cual es tu contraseña?"));
-// let intentos = 3;
+
+
+
+
 
 
 

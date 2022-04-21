@@ -32,14 +32,38 @@
                 <span class="estanteria">Estanteria 3</span>
                 <span class="estanteria">Estanteria 4</span>
                 <span class="estanteria">Estanteria 5</span>
+                <button class="estanteria" id="filtro" >Filtrar Libro</button>
             </section>
             <section class="seccion2">
-                <span class="pasos">1 - Registrar Usuario</span>
-                <span class="pasos">2 - Solicitar Prestamo</span>
-                <span class="pasos">3 - Retirar. Mira donde estamos!</span>
+                <button class="pasos" id="registro">1 - Registrar Usuario</button>
+                <button class="pasos" id="prestamo">2 - Solicitar Prestamo</button>
+                <button class="pasos" id="retirar">3 - Retirar. Mira donde estamos!</button>
                 <p id="instrucciones">Para encargar un libro primero Registre un Usuario (1), solicite el libro que desea (2) y venga a retirarlo personalmente! en el paso (3) vera nuestra ubicación. </p>
             </section>
         </article>
+        <div class="ventanas mostrar">
+            <div class="ventana_emergente" id="ventanaFiltro">
+                <form class="formularioFiltro">
+                    <ul>
+                        <li>
+                            <h2>Que libro desea buscar?</h2>
+                        </li>
+                        <li>
+                            <input type="text" name="libro" id="buscadorFiltro">
+                            <label for="buscadorFiltro">describa el tamaño del libro que desea: corto o largo, en caso de querer ver todo la coleccion escriba 'catalogo'</label>
+                        </li>
+                        <li>
+                            <button type="submit" id="botonBuscar">Buscar</button>
+                        </li>
+                        <li>
+                            <h6>Resultado:</h6>
+                            <textarea class="resultado" id="resultado"></textarea>
+                        </li>
+                    </ul>
+                </form>
+                <button class="cerrar">cerrar</button>
+            </div>
+        </div>
         <footer class="pie"> <!-- pie de pagina -->
             <div class="evita">
                 <h2 id="evita_name">Movimiento Evita</h2>
