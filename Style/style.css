@@ -5,8 +5,9 @@
 
 body {
   background-color: #ffffff;
-  background-image: url(Media/fondo.jpg);
-  background-repeat: repeat-x;
+  background: radial-gradient(black 3px, transparent 4px), radial-gradient(#031F4F 3px, transparent 4px), linear-gradient(#fff 4px, transparent 0), linear-gradient(45deg, transparent 74px, transparent 75px, #031F4F 75px, #031F4F 76px, transparent 77px, transparent 109px), linear-gradient(-45deg, transparent 75px, transparent 76px, #031F4F 76px, #031F4F 77px, transparent 78px, transparent 109px), #fff;
+  background-size: 109px 109px, 109px 109px,100% 6px, 109px 109px, 109px 109px;
+  background-position: 54px 55px, 0px 0px, 0px 0px, 0px 0px, 0px 0px;
 }
 
 .encabezado {
@@ -108,7 +109,7 @@ body {
   text-align: center;
 }
 
-.grid-container .ventanas .ventana_emergente .formularioFiltro input {
+.grid-container .ventanas .ventana_emergente form input, .grid-container .ventanas .ventana_emergente form select {
   width: 100%;
   margin: 10px;
   height: 50px;
@@ -118,7 +119,7 @@ body {
   border: 1px solid #BBBBBB;
 }
 
-.grid-container .ventanas .ventana_emergente .formularioFiltro button {
+.grid-container .ventanas .ventana_emergente form button {
   margin: 10px;
   padding: 0 20px;
   height: 40px;
@@ -129,14 +130,14 @@ body {
   cursor: pointer;
 }
 
-.grid-container .ventanas .ventana_emergente .formularioFiltro button:hover {
+.grid-container .ventanas .ventana_emergente form button:hover {
   -webkit-transition: .3s ease;
   transition: .3s ease;
   background-color: #031F4F;
   color: white;
 }
 
-.grid-container .ventanas .ventana_emergente .formularioFiltro .resultado {
+.grid-container .ventanas .ventana_emergente form .resultado {
   border: 1px black solid;
   margin: 10px;
   font: normal 16px "BIZ UDPMincho", serif;
@@ -202,6 +203,7 @@ body {
   color: #031F4F;
   font-size: 36px;
   font-weight: bold;
+  text-shadow: 0 1px 3px #031F4F;
   width: 800px;
   height: 150px;
   background-color: white;
@@ -240,8 +242,9 @@ body {
   color: #031F4F;
   margin: 15px;
   font-size: 30px;
-  font-weight: bolder;
+  font-weight: 800;
   background-color: white;
+  text-shadow: 0 0 2px #031F4F;
 }
 
 .grid-container .main .seccion1 .estanteria {

@@ -58,8 +58,8 @@ body{
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             text-align: center;
-            .formularioFiltro{
-                input{
+            form{
+                input, select{
                     width: 100%;
                     margin: 10px;
                     height: 50px;
@@ -130,6 +130,7 @@ body{
             color: $color;
             font-size: 36px;
             font-weight: bold;
+            text-shadow: 0 1px 3px $color;
             width: 800px;
             height: 150px;
             background-color: white;
@@ -141,15 +142,15 @@ body{
         flex-direction: row;
         .seccion1{
             @include secciones;
-            // background-color: orange;
             margin: 30px;
             padding: 30px;
             #explorar{
                 color: $color;
                 margin: 15px;
                 font-size: 30px;
-                font-weight: bolder;
+                font-weight: 800;
                 background-color: white;
+                text-shadow: 0 0 2px $color;
             }
             .estanteria{
                 margin: 10px;

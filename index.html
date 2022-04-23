@@ -35,21 +35,21 @@
                 <button class="estanteria" id="filtro" >Filtrar Libro</button>
             </section>
             <section class="seccion2">
-                <button class="pasos" id="registro">1 - Registrar Usuario</button>
+                <button class="pasos" id="usuario">1 - Registrar Usuario</button>
                 <button class="pasos" id="prestamo">2 - Solicitar Prestamo</button>
-                <button class="pasos" id="retirar">3 - Retirar. Mira donde estamos!</button>
-                <p id="instrucciones">Para encargar un libro primero Registre un Usuario (1), solicite el libro que desea (2) y venga a retirarlo personalmente! en el paso (3) vera nuestra ubicación. </p>
+                <button class="pasos" id="ubicacion">3 - Retirar. Mira donde estamos!</button>
+                <p id="instrucciones">Encargue un libro en 3 simples pasos!: <br><br> Registre un Usuario <b>(1)</b>, <br>Solicite el libro que desea <b>(2)</b> y <br>Vea nuestra ubicacion para retirarlo! <b>(3)</b></p>
             </section>
         </article>
-        <div class="ventanas mostrar">
-            <div class="ventana_emergente" id="ventanaFiltro">
-                <form class="formularioFiltro">
+        <div class="ventanas" id="emergenteFiltro">
+            <div class="ventana_emergente">
+                <form class="formularioFiltro" id="formularioFiltro">
                     <ul>
                         <li>
                             <h2>Que libro desea buscar?</h2>
                         </li>
                         <li>
-                            <input type="text" name="libro" id="buscadorFiltro">
+                            <input type="text" name="libro" id="buscadorFiltro" placeholder="Titulo de la obra">
                             <label for="buscadorFiltro">describa el tamaño del libro que desea: corto o largo, en caso de querer ver todo la coleccion escriba 'catalogo'</label>
                         </li>
                         <li>
@@ -61,7 +61,94 @@
                         </li>
                     </ul>
                 </form>
-                <button class="cerrar">cerrar</button>
+                <button class="cerrar" id="cerrarFiltro">cerrar</button>
+            </div>
+        </div>
+        <div class="ventanas" id="emergenteUsuario">
+            <div class="ventana_emergente">
+                <form class="formularioUsuario" id="formularioUsuario">
+                    <ul>
+                        <li>
+                            <h2>Registre su usuario en nuestra base de datos para realizar un prestamo!</h2>
+                        </li>
+                        <br><br>
+                        <li>
+                            <h4>Nombre y apellido</h4>
+                            <input type="text" name="nombre" id="nombreUser" placeholder="nombre apellido">
+                        </li>
+                        <li>
+                            <h4>Correo electronico</h4>
+                            <input type="text" name="mail" id="mailUser" placeholder="nombremail@ejemplo.com">
+                        </li>
+                        <li>
+                            <h4>Numero de telefono</h4>
+                            <input name="celuUser" id="celuUser" placeholder="numero con codigo de area sin 0 ni 15">
+                        </li>
+                        <li>
+                            <button type="submit" id="botonRegistrar">Registrar</button>
+                        </li>
+                    </ul>
+                </form>
+                <br>
+                <button class="cerrar" id="cerrarUsuario">cerrar</button>
+            </div>
+        </div>
+        <div class="ventanas" id="emergenteMapa">
+            <div class="ventana_emergente" id="ventana_emergente_mapa">
+                <form class="formularioMapa" id="formularioMapa">
+                    <ul>
+                        <li>
+                            <h2>Nos encontramos en el tercer piso del Partido Justicialista en Santa Fe Capital</h2>
+                        </li>
+                        <br><br>
+                        <li>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d357.0358521178534!2d-60.70229652040841!3d-31.64160887151931!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95b5a9bc5dbe100b%3A0xd0c9d952a71e82c9!2sPartido%20Justicialista%20Distrito%20Santa%20Fe!5e0!3m2!1ses!2sar!4v1650682536812!5m2!1ses!2sar" width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </li>
+                        <br>
+                        <li>
+                            <h5>Gobernador Crespo 2358 - Santa Fe Capital (08-13hs)</h5>
+                            <br>
+                            <h5>mail: yolandaponti@gmail.com | cel: 3498460438</h5>
+                        </li>
+                    </ul>
+                </form>
+                <br>
+                <button class="cerrar" id="cerrarMapa">cerrar</button>
+            </div>
+        </div>
+        <div class="ventanas" id="emergentePrestamo">
+            <div class="ventana_emergente">
+                <form class="formularioPrestamo" id="formularioPrestamo">
+                    <ul>
+                        <li>
+                            <h2>Aquí puede realizar una reserva para pedir el prestamo de una obra</h2>
+                        </li>
+                        <br><br>
+                        <li>
+                            <h4>Seleccione su usuario</h4>
+                            <select>
+                                <option value="usuario">usuario de prueba1</option>
+                                <option value="usuario">usuario de prueba2</option>
+                                <option value="usuario">usuario de prueba3</option>
+                            </select>
+                        </li>
+                        <br>
+                        <li>
+                            <h4>Seleccione la obra que desea pedir</h4>
+                            <select>
+                                <option value="obra">obra de prueba1</option>
+                                <option value="obra">obra de prueba2</option>
+                                <option value="obra">obra de prueba3</option>
+                            </select>
+                        </li>
+                        <li>
+                            <h4>Seleccione la fecha que va a retirar la obra</h4>
+                            <select></select>
+                        </li>
+                    </ul>
+                </form>
+                <br>
+                <button class="cerrar" id="cerrarPrestamo">cerrar</button>
             </div>
         </div>
         <footer class="pie"> <!-- pie de pagina -->
