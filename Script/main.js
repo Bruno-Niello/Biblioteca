@@ -111,7 +111,34 @@ const registro = () => {
         localStorage.setItem("usuarios", JSON.stringify(arrayUser));
     }
 }
-
+//funcion para verificar datos en el storage
+const verificar = () => {
+    let datos = [];
+    if(localStorage.getItem("usuarios") != null) {
+        datos = JSON.parse(localStorage.getItem("usuarios"));
+        return datos;
+    } 
+}
+//guardar datos en local storage
+const guardar = () => {
+    registro();
+    if(verificar() != undefined) { //examina si hay algo en storage, para almacenarlo
+        localStorage.setItem("usuarios", JSON.stringify(verificar())); 
+    } else { //de lo contario almacena directamente el nuevo user
+        localStorage.setItem("usuarios", JSON.stringify(usuarios))
+    }
+}
+//funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
+const imprimir = () => {
+    if(verificar() != undefined){
+        verificar().forEach(obj => {
+            document.querySelector("#selectUsuario").innerHTML += 
+            `
+            <option value="usuario">${obj.nombre}</option>
+            `
+        })
+    }
+}
 
                 //  EVENTOS // 
 
@@ -129,7 +156,7 @@ botonRegistrar.onclick = (e)=>{
 //boton que activa la busqueda en "filtrar libro"
 botonBuscar.onclick = (e)=>{
     e.preventDefault();
-    pregunta();
+    guardar();
 }
 
 //botones que abren y cierran el filtro    
@@ -160,6 +187,9 @@ prestamo.onclick = () => {
 cerrarPrestamo.onclick = () => {
     emergentePrestamo.classList.remove("mostrar");
 }
+
+//evento que imprime los usuarios en la ventana de prestamos
+imprimir();
 
 
 
