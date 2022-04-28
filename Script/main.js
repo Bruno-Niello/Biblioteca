@@ -100,38 +100,24 @@ const registro = () => {
     const celuUser = document.querySelector("#celuUser").value; //input celular
 
     const nuevoUser = new Usuario(nombreUser, mailUser, celuUser);
-    const arrayUser = [];
+    let arrayUsers = [];
 
-    if(localStorage.getItem("usuario") == null){
+    if(localStorage.getItem("usuarios") == null){
         usuarios.push(nuevoUser);
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     } else{
-        arrayUser = JSON.parse(localStorage.getItem("usuarios"));
-        arrayUser.push(usuarios);
-        localStorage.setItem("usuarios", JSON.stringify(arrayUser));
+        // arrayUsers.push(JSON.parse(localStorage.getItem("usuarios")));
+        arrayUsers.push(nuevoUser);
+        usuarios.push.apply(usuarios, arrayUsers);
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
 }
-//funcion para verificar datos en el storage
-const verificar = () => {
-    let datos = [];
-    if(localStorage.getItem("usuarios") != null) {
-        datos = JSON.parse(localStorage.getItem("usuarios"));
-        return datos;
-    } 
-}
-//guardar datos en local storage
-const guardar = () => {
-    registro();
-    if(verificar() != undefined) { //examina si hay algo en storage, para almacenarlo
-        localStorage.setItem("usuarios", JSON.stringify(verificar())); 
-    } else { //de lo contario almacena directamente el nuevo user
-        localStorage.setItem("usuarios", JSON.stringify(usuarios))
-    }
-}
+
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
 const imprimir = () => {
-    if(verificar() != undefined){
-        verificar().forEach(obj => {
+    if(localStorage.getItem("usuarios") != null){
+        let users = JSON.parse(localStorage.getItem("usuarios"))
+        users.forEach(obj => {
             document.querySelector("#selectUsuario").innerHTML += 
             `
             <option value="usuario">${obj.nombre}</option>
@@ -142,15 +128,11 @@ const imprimir = () => {
 
                 //  EVENTOS // 
 
-//evento para abrir ventana emergente (sin uso todavia)
-const emergente1 = (URL) => {
-    window.open(URL, "ventana", "width=500, height=300,scrollbars=NO")
-}
-
 //boton que registra usuario en "registrar usuario"
 botonRegistrar.onclick = (e)=>{
     e.preventDefault();
     registro();
+    imprimir();
 }
 
 //boton que activa la busqueda en "filtrar libro"
@@ -194,6 +176,33 @@ imprimir();
 
 
 
+
+// FUNCIONES EN CONSTRUCCION 
+
+//vaciar formulario
+const vaciar = () => {
+}
+//funcion para verificar datos en el storage 
+const verificar = () => {
+    let datos = [];
+    if(localStorage.getItem("usuarios") != null) {
+        datos = JSON.parse(localStorage.getItem("usuarios"));
+        return datos;
+    } 
+}
+//guardar datos en local storage
+const guardar = () => {
+    registro();
+    if(verificar() != undefined) { //examina si hay algo en storage, para almacenarlo
+        localStorage.setItem("usuarios", JSON.stringify(verificar())); 
+    } else { //de lo contario almacena directamente el nuevo user
+        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+    }
+}
+//evento para abrir ventana emergente (sin uso todavia)
+const emergente1 = (URL) => {
+    window.open(URL, "ventana", "width=500, height=300,scrollbars=NO")
+}
 
 
 
