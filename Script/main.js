@@ -41,6 +41,7 @@ class Prestamo {
         const emergenteUsuario = document.querySelector("#emergenteUsuario"); //ventana emergente de usuario
         const cerrarUsuario = document.querySelector("#cerrarUsuario"); //boton de cerrar usuario
         const usuario = document.querySelector("#usuario"); //boton de abrir usuario
+        const botonRegistrar = document.querySelector("#formularioUsuario"); //boton de registrar usuario
         //ubicacion (mapa)
         const emergenteMapa = document.querySelector("#emergenteMapa"); //ventana emergente ubicacion
         const cerrarMapa = document.querySelector("#cerrarMapa"); //boton de cerrar mapa
@@ -49,8 +50,13 @@ class Prestamo {
         const emergentePrestamo = document.querySelector("#emergentePrestamo");//ventana emergente de prestamos
         const cerrarPrestamo = document.querySelector("#cerrarPrestamo");//boton para cerrar prestamo
         const prestamo = document.querySelector("#prestamo");//boton para abrir prestamo
-      
-        const botonRegistrar = document.querySelector("#botonRegistrar"); //boton de registrar usuario
+        //estanterias
+        const emergenteEstanteriaUno = document.querySelector("#emergenteEstanteriaUno"); //ventana emergente de estanteria uno
+        const cerrarEstanteriaUno = document.querySelector("#cerrarEstanteriaUno"); //boton para cerrar estanteria uno
+        const estanteriaUno = document.querySelector("#estUno");//boton para abrir estanteria uno
+        let estanteriaText = document.querySelector("#estanteriaText");//texto dentro de la emergente estanteria uno
+
+        
 
 
                 //  FUNCIONES Y ARRAYS //
@@ -67,6 +73,8 @@ estanterias.push(new Libro("Jauretche: medios y politica", "pablo adrian vazquez
 estanterias.push(new Libro("la republica", "platon", "gredos", 600));
 estanterias.push(new Libro("el extranjero", "albert camus", "atalaya", 184));
 estanterias.push(new Libro("Las aventuras de Tom Sawyer", "mark twain", "anaya", 142));
+
+
 
 
 //filtros para la busqueda (necesito acomplejizarlos)
@@ -93,13 +101,16 @@ const pregunta = () => {
     }
 }
 //funcion de registro de usuario y almacenamiento en el storage
-const registro = () => {
+const registro = (e) => {
+
+    e.preventDefault();
 
     const nombreUser = document.querySelector("#nombreUser").value; //input nombre
     const mailUser = document.querySelector("#mailUser").value; //input mail
     const celuUser = document.querySelector("#celuUser").value; //input celular
 
     const nuevoUser = new Usuario(nombreUser, mailUser, celuUser);
+
     let arrayUsers = [];
 
     if(localStorage.getItem("usuarios") == null){
@@ -126,14 +137,38 @@ const imprimir = () => {
     }
 }
 
+//funcion para imprimir los objetos del array en la ventanas "estanterias"
+const imprimirEstanterias = () => {
+    for (const libro of estanterias){
+        let nodo = document.createElement("div");
+        nodo.innerHTML = `
+        <h4>${libro.titulo}</h4>
+        <h5>${libro.autor}</h5>
+        <h6>${libro.editorial}</h6>
+        <h6>${libro.paginas}</h6>
+        <h6>${libro.stock}</h6>
+        <br>
+        `
+
+        document.querySelector("#ventanaEstanteriaUno").appendChild(nodo);
+    }
+}
+
+
+
+
+
                 //  EVENTOS // 
 
+//formulario
+botonRegistrar.addEventListener("submit", registro);
+
 //boton que registra usuario en "registrar usuario"
-botonRegistrar.onclick = (e)=>{
-    e.preventDefault();
-    registro();
-    imprimir();
-}
+// botonRegistrar.onclick = (e)=>{
+//     e.preventDefault();
+//     registro();
+//     imprimir();
+// }
 
 //boton que activa la busqueda en "filtrar libro"
 botonBuscar.onclick = (e)=>{
@@ -169,9 +204,19 @@ prestamo.onclick = () => {
 cerrarPrestamo.onclick = () => {
     emergentePrestamo.classList.remove("mostrar");
 }
+//botones que abren y cierran la ventana de estanteria uno
+estanteriaUno.onclick = () => {
+    emergenteEstanteriaUno.classList.add("mostrar");
+    //evento que imprime el array estanterias dentro de la ventana de estanteria 1
+    imprimirEstanterias();
+}
+cerrarEstanteriaUno.onclick = () => { 
+    emergenteEstanteriaUno.classList.remove("mostrar");
+}
 
 //evento que imprime los usuarios en la ventana de prestamos
 imprimir();
+
 
 
 

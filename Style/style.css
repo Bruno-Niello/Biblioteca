@@ -158,8 +158,8 @@ body {
 }
 
 .grid-container .ventanas .ventana_emergente .cerrar:hover {
-  -webkit-transition: .3s ease;
-  transition: .3s ease;
+  -webkit-transition: ease;
+  transition: ease;
   background-color: rgba(255, 0, 0, 0.3);
 }
 
@@ -265,6 +265,19 @@ body {
   background-color: white;
   -webkit-box-shadow: -2px 2px 5px black;
           box-shadow: -2px 2px 5px black;
+}
+
+.grid-container .main .seccion1 .estanteria:hover {
+  background-color: #031F4F;
+  color: white;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.grid-container .main .seccion1 .estanteria:active {
+  background-color: white;
+  color: #031F4F;
+  font-size: 115%;
 }
 
 .grid-container .main .seccion1 #filtro {
