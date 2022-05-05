@@ -230,19 +230,12 @@ const vaciar = () => {
 //funcion para verificar datos en el storage 
 const verificar = () => {
     let datos = [];
-    if(localStorage.getItem("usuarios") != null) {
-        datos = JSON.parse(localStorage.getItem("usuarios"));
-        return datos;
-    } 
+    localStorage.getItem("usuarios") != null && (datos = JSON.parse(localStorage.getItem("usuarios"))); //operador AND  
 }
 //guardar datos en local storage
 const guardar = () => {
     registro();
-    if(verificar() != undefined) { //examina si hay algo en storage, para almacenarlo
-        localStorage.setItem("usuarios", JSON.stringify(verificar())); 
-    } else { //de lo contario almacena directamente el nuevo user
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
-    }
+    verificar() != undefined ? localStorage.setItem("usuarios", JSON.stringify(verificar())) : localStorage.setItem("usuarios", JSON.stringify(usuarios)); //operador ternario que examina el storage y almacena datos. 
 }
 //evento para abrir ventana emergente (sin uso todavia)
 const emergente1 = (URL) => {
@@ -257,13 +250,19 @@ const emergente1 = (URL) => {
 
 
 
+//      -PAPELERA DE RECICLAJE-
+
+// if(verificar() != undefined) { //examina si hay algo en storage, para almacenarlo
+//     localStorage.setItem("usuarios", JSON.stringify(verificar())); 
+// } else { //de lo contario almacena directamente el nuevo user
+//     localStorage.setItem("usuarios", JSON.stringify(usuarios));
+// }
 
 
-
-
-
-
-
+// if(localStorage.getItem("usuarios") != null) {
+//     datos = JSON.parse(localStorage.getItem("usuarios"));
+//     return datos;
+// } 
 
 
 
