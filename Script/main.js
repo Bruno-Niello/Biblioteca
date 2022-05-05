@@ -1,4 +1,6 @@
-               //  CLASES //               
+// $(()=>{}) //jquery 
+
+    //  CLASES //               
                 
 class Libro {
     constructor(titulo, autor, editorial, paginas) {
@@ -83,10 +85,22 @@ const filtroCorto = estanterias.filter((el) => el.paginas < 200)
 const nombresLibros = estanterias.map((el) => el.titulo); 
 
 
+//SWEET ALERT mensaje de bienvenida
+Swal.fire({
+    title: "¡Bienvenido!",
+    imageUrl: "Media/logo.jpg",
+    imageWidth: 200,
+    imagenHeight: 200,
+    confirmButtonColor: "#031F4F",
+    confirmButtonText: "Entrar"
+});
+
+
 //funcion de busqueda
 const pregunta = () => {
    
     const busqueda = document.querySelector("#buscadorFiltro").value;
+    
     if(busqueda == "largo"){
         resultado.innerText = JSON.stringify(filtroLargo);
     }
@@ -101,9 +115,9 @@ const pregunta = () => {
     }
 }
 //funcion de registro de usuario y almacenamiento en el storage
-const registro = (e) => {
+const registro = () => {
 
-    e.preventDefault();
+    // e.preventDefault();
 
     const nombreUser = document.querySelector("#nombreUser").value; //input nombre
     const mailUser = document.querySelector("#mailUser").value; //input mail
@@ -122,6 +136,8 @@ const registro = (e) => {
         usuarios.push.apply(usuarios, arrayUsers);
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
+
+    
 }
 
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
@@ -161,7 +177,10 @@ const imprimirEstanterias = () => {
                 //  EVENTOS // 
 
 //formulario
-botonRegistrar.addEventListener("submit", registro);
+botonRegistrar.addEventListener("submit", ()=>{
+    
+    registro();
+    Swal.fire("Usuario Registrado")});
 
 //boton que registra usuario en "registrar usuario"
 // botonRegistrar.onclick = (e)=>{
@@ -173,7 +192,7 @@ botonRegistrar.addEventListener("submit", registro);
 //boton que activa la busqueda en "filtrar libro"
 botonBuscar.onclick = (e)=>{
     e.preventDefault();
-    guardar();
+    pregunta();
 }
 
 //botones que abren y cierran el filtro    
