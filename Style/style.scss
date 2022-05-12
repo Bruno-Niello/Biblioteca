@@ -253,6 +253,21 @@ body{
             color: $color;
             }
         }
+        .admin{
+            margin: 10px;
+            padding: 0 20px;
+            height: 40px;
+            line-height: 40px;
+            border: 2px solid $color;
+            color:$color;
+            border-radius: 3px;
+            cursor: pointer;
+            &:hover{
+                transition: .3s ease;
+                background-color: rgba(0, 128, 0, 0.452);
+                color:white;
+            }
+        }
     }
        
     

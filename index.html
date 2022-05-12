@@ -20,10 +20,7 @@
         <header class="encabezado"> <!-- encabezado -->
             <img src="Media/logo.jpg" id="logo">
             <h1 class="titulo_biblioteca"> Biblioteca Popular Yolanda Ponti</h1>
-    
-            
         </header>
-        <nav></nav> <!-- menu - no implementado -->
         <article class="main"> <!-- cuerpo de la pagina -->
             <section class="seccion1"> 
                 <h3 id="explorar">Explorar Biblioteca</h3>
@@ -155,6 +152,39 @@
                 <button class="cerrar" id="cerrarPrestamo">cerrar</button>
             </div>
         </div>
+        <div class="ventanas" id="emergenteAdmin">
+            <div class="ventana_emergente">
+                <form class="formularioLibro" id="formularioLibro">
+                    <ul>
+                        <li>
+                            <h2>Cargar libro en la base de datos</h2>
+                        </li>
+                        <br><br>
+                        <li>
+                            <h4>Titulo</h4>
+                            <input type="text" name="titulo" id="libroTitulo" placeholder="titulo de la obra">
+                        </li>
+                        <li>
+                            <h4>Autor</h4>
+                            <input type="text" name="autor" id="libroAutor" placeholder="autor de la obra">
+                        </li>
+                        <li>
+                            <h4>Editorial</h4>
+                            <input type="text" name="editorial" id="libroEditorial" placeholder="nombre de la ditorial">
+                        </li>
+                        <li>
+                            <h4>Páginas</h4>
+                            <input name="paginas" id="libroPaginas" placeholder="numero de paginas">
+                        </li>
+                        <li>
+                            <button type="submit" id="botonCargar">cargar libro</button>
+                        </li>
+                    </ul>
+                </form>
+                <br>
+                <button class="cerrar" id="cerrarAdmin">cerrar</button>
+            </div>
+        </div>
         <footer class="pie"> <!-- pie de pagina -->
             <div class="evita">
                 <h2 id="evita_name">Movimiento Evita</h2>
@@ -180,6 +210,7 @@
                 </a>
             </div>
             <a id="github" href="https://github.com/Bruno-Niello" target="_blank"><h3 id="niello">Desarrollado por © Bruno Niello 2022</h3></a>
+            <button class="admin" id="admin">Administrador</button>
         </footer> 
     </div>
     <!-- Sweet Alert 2 -->

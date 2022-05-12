@@ -30,6 +30,9 @@ class Prestamo {
 
                 //  VARIABLES //
 
+//  "base de datos"
+const dataBase = "../DataBase.json"
+
 //DOM
     //ventanas emergentes
 
@@ -57,8 +60,11 @@ class Prestamo {
         const cerrarEstanteriaUno = document.querySelector("#cerrarEstanteriaUno"); //boton para cerrar estanteria uno
         const estanteriaUno = document.querySelector("#estUno");//boton para abrir estanteria uno
         let estanteriaText = document.querySelector("#estanteriaText");//texto dentro de la emergente estanteria uno
-
-        
+        //pestaña de administrador para cargar libros
+        const emergenteAdmin = document.querySelector("#emergenteAdmin");
+        const cerrarAdmin = document.querySelector("#cerrrarAdmin");
+        const admin = document.querySelector("#admin");
+        const botonCargar = document.querySelector("#botonCargar");
 
 
                 //  FUNCIONES Y ARRAYS //
@@ -117,8 +123,6 @@ const pregunta = () => {
 //funcion de registro de usuario y almacenamiento en el storage
 const registro = () => {
 
-    // e.preventDefault();
-
     const nombreUser = document.querySelector("#nombreUser").value; //input nombre
     const mailUser = document.querySelector("#mailUser").value; //input mail
     const celuUser = document.querySelector("#celuUser").value; //input celular
@@ -136,14 +140,30 @@ const registro = () => {
         usuarios.push.apply(usuarios, arrayUsers);
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
-
-    
 }
+//funcion para cargar libros en el JSON
+const guardarLibro = () => {
 
+    const titulo = document.querySelector("#libroTitulo");
+    const autor = document.querySelector("#libroAutor");
+    const editorial = document.querySelector("#libroEditorial");
+    const paginas = document.querySelector("#libroPaginas");
+
+    const nuevoLibro = new Libro(titulo, autor, editorial, paginas);
+
+    fetch(dataBase,{
+        method: "POST",
+        body: JSON.stringify(nuevoLibro),
+        headers: {"content-type":"application/json"}
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+
+}
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
 const imprimir = () => {
-    if(localStorage.getItem("usuarios") != null){
-        let users = JSON.parse(localStorage.getItem("usuarios"))
+    if(localStorage.getItem("usuarios") != null || users != users){
+        let users = JSON.parse(localStorage.getItem("usuarios"));
         users.forEach(obj => {
             document.querySelector("#selectUsuario").innerHTML += 
             `
@@ -177,10 +197,15 @@ const imprimirEstanterias = () => {
                 //  EVENTOS // 
 
 //formulario
-botonRegistrar.addEventListener("submit", ()=>{
+botonRegistrar.addEventListener("submit", (e)=>{
     
-    registro();
+    const formulario = document.querySelector("#formularioUsuario");
+
+    registro(e);
+    e.preventDefault();
+    formulario.reset();
     Swal.fire("Usuario Registrado")});
+    
 
 //boton que registra usuario en "registrar usuario"
 // botonRegistrar.onclick = (e)=>{
@@ -205,6 +230,8 @@ cerrarFiltro.onclick = () => {
 //botones que abren y que cierran el registro de usuario
 usuario.onclick = () => {
     emergenteUsuario.classList.add("mostrar");
+    //evento que imprime los usuarios en la ventana de prestamos
+    imprimir();
 }
 cerrarUsuario.onclick = () => {
     emergenteUsuario.classList.remove("mostrar");
@@ -232,20 +259,23 @@ estanteriaUno.onclick = () => {
 cerrarEstanteriaUno.onclick = () => { 
     emergenteEstanteriaUno.classList.remove("mostrar");
 }
-
-//evento que imprime los usuarios en la ventana de prestamos
-imprimir();
-
-
-
+//botones que abren y cierran la ventana de administrador
+admin.onclick = () => {
+    emergenteAdmin.classList.add("mostrar");
+}
+cerrarAdmin.onclick = () => {
+    emergenteAdmin.classList.remove("mostrar");
+}
+botonCargar.onclick = (e) => {
+    e.preventDefault();
+    guardarLibro();
+}
 
 
 
 // FUNCIONES EN CONSTRUCCION 
 
-//vaciar formulario
-const vaciar = () => {
-}
+
 //funcion para verificar datos en el storage 
 const verificar = () => {
     let datos = [];
