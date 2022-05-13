@@ -144,21 +144,14 @@ const guardarLibro = () => {
 //funcion para guardar datos del JSON en el array
 const librosJson = async () => {
     try {
-        let response = await fetch("./database.json");
+        let response = await fetch("database.json");
         let result = await response.json();
-        console.log(result[0]);
+        console.log(result);
         // estanterias.push(result)
     } catch(error) {
         console.log(error);
     }
 }
-
-
-const mefe = () => {
-    fetch("database.json")
-        .then(resp => console.log(resp.json())) 
-}
-
 
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
 const imprimir = () => {
