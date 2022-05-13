@@ -1,13 +1,11 @@
-// $(()=>{}) //jquery 
-
-    //  CLASES //               
+   //  CLASES //               
                 
 class Libro {
     constructor(titulo, autor, editorial, paginas) {
-        this.titulo = titulo.toLowerCase();
-        this.autor = autor.toLowerCase();
-        this.editorial = editorial.toLowerCase();
-        this.paginas = parseInt(paginas); 
+        this.titulo = titulo
+        this.autor = autor
+        this.editorial = editorial
+        this.paginas = paginas; 
         this.stock = true;
     }
 }
@@ -31,7 +29,7 @@ class Prestamo {
                 //  VARIABLES //
 
 //  "base de datos"
-const dataBase = "../DataBase.json"
+const url = "DataBase.json"
 
 //DOM
     //ventanas emergentes
@@ -62,7 +60,7 @@ const dataBase = "../DataBase.json"
         let estanteriaText = document.querySelector("#estanteriaText");//texto dentro de la emergente estanteria uno
         //pestaña de administrador para cargar libros
         const emergenteAdmin = document.querySelector("#emergenteAdmin");
-        const cerrarAdmin = document.querySelector("#cerrrarAdmin");
+        const cerrarAdmin = document.querySelector("#cerrarAdmin");
         const admin = document.querySelector("#admin");
         const botonCargar = document.querySelector("#botonCargar");
 
@@ -73,17 +71,6 @@ const dataBase = "../DataBase.json"
 const estanterias = [];
 const usuarios = [];
 const prestamos = [];
-
-//los libros por ahora se pushean desde aca ya que necesito una interfaz de administrador en la pagina
-estanterias.push(new Libro("el principe", "maquiavelo", "distal", 138));
-estanterias.push(new Libro("la guerra de los mundos", "h. g. wells", "terramar", 235));
-estanterias.push(new Libro("Jauretche: medios y politica", "pablo adrian vazquez", "copppal", 246));
-estanterias.push(new Libro("la republica", "platon", "gredos", 600));
-estanterias.push(new Libro("el extranjero", "albert camus", "atalaya", 184));
-estanterias.push(new Libro("Las aventuras de Tom Sawyer", "mark twain", "anaya", 142));
-
-
-
 
 //filtros para la busqueda (necesito acomplejizarlos)
 const filtroLargo = estanterias.filter((el) => el.paginas > 200)
@@ -141,25 +128,38 @@ const registro = () => {
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     }
 }
-//funcion para cargar libros en el JSON
+
+//funcion para guardar libros en el array estanterias 
 const guardarLibro = () => {
 
-    const titulo = document.querySelector("#libroTitulo");
-    const autor = document.querySelector("#libroAutor");
-    const editorial = document.querySelector("#libroEditorial");
-    const paginas = document.querySelector("#libroPaginas");
+    const titulo = document.querySelector("#libroTitulo").value; //input
+    const autor = document.querySelector("#libroAutor").value; //input
+    const editorial = document.querySelector("#libroEditorial").value; //input
+    const paginas = document.querySelector("#libroPaginas").value; //input
 
-    const nuevoLibro = new Libro(titulo, autor, editorial, paginas);
+    const nuevoLibro = new Libro(titulo, autor, editorial, paginas); 
 
-    fetch(dataBase,{
-        method: "POST",
-        body: JSON.stringify(nuevoLibro),
-        headers: {"content-type":"application/json"}
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-
+    estanterias.push(nuevoLibro);
 }
+//funcion para guardar datos del JSON en el array
+const librosJson = async () => {
+    try {
+        let response = await fetch("./database.json");
+        let result = await response.json();
+        console.log(result[0]);
+        // estanterias.push(result)
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+
+const mefe = () => {
+    fetch("database.json")
+        .then(resp => console.log(resp.json())) 
+}
+
+
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
 const imprimir = () => {
     if(localStorage.getItem("usuarios") != null || users != users){
@@ -191,9 +191,6 @@ const imprimirEstanterias = () => {
 }
 
 
-
-
-
                 //  EVENTOS // 
 
 //formulario
@@ -205,14 +202,6 @@ botonRegistrar.addEventListener("submit", (e)=>{
     e.preventDefault();
     formulario.reset();
     Swal.fire("Usuario Registrado")});
-    
-
-//boton que registra usuario en "registrar usuario"
-// botonRegistrar.onclick = (e)=>{
-//     e.preventDefault();
-//     registro();
-//     imprimir();
-// }
 
 //boton que activa la busqueda en "filtrar libro"
 botonBuscar.onclick = (e)=>{
@@ -267,14 +256,24 @@ cerrarAdmin.onclick = () => {
     emergenteAdmin.classList.remove("mostrar");
 }
 botonCargar.onclick = (e) => {
+
+    const formulario = document.querySelector("#formularioLibro");
+
     e.preventDefault();
     guardarLibro();
+    formulario.reset();
+
 }
 
 
 
-// FUNCIONES EN CONSTRUCCION 
 
+
+
+
+
+
+// FUNCIONES EN CONSTRUCCION 
 
 //funcion para verificar datos en el storage 
 const verificar = () => {
@@ -290,29 +289,22 @@ const guardar = () => {
 const emergente1 = (URL) => {
     window.open(URL, "ventana", "width=500, height=300,scrollbars=NO")
 }
-
-
-
-
-
-
-
-
-
-//      -PAPELERA DE RECICLAJE-
-
-// if(verificar() != undefined) { //examina si hay algo en storage, para almacenarlo
-//     localStorage.setItem("usuarios", JSON.stringify(verificar())); 
-// } else { //de lo contario almacena directamente el nuevo user
-//     localStorage.setItem("usuarios", JSON.stringify(usuarios));
-// }
-
-
-// if(localStorage.getItem("usuarios") != null) {
-//     datos = JSON.parse(localStorage.getItem("usuarios"));
-//     return datos;
-// } 
-
+//funcion asincronica para guardar datos en el json
+const guardarJson = async ()=> {
+    try {
+        let response = await fetch("./DataBase.json",{
+            method: 'POST',
+            body: JSON.stringify(estanterias),
+            headers: {
+                'content-type':'application/json'
+            }
+        })
+        let resultado = await response.json();
+        resultado.forEach();
+    } catch(error) {
+        console.log(error);
+    }
+}
 
 
 

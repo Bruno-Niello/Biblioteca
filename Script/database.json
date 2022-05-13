@@ -1,0 +1,10 @@
+[
+    {"titulo":"el principe","autor":"maquiavelo","editorial":"distal","paginas":138,"stock":true},
+    {"titulo":"la guerra de los mundos","autor":"h. g. wells","editorial":"terramar","paginas":235,"stock":true},
+    {"titulo":"Jauretche: medios y politica","autor":"pablo adrian vazquez","editorial":"copppal","paginas":246,"stock":true},
+    {"titulo":"la republica","autor":"platon","editorial":"gredos","paginas":600,"stock":true},
+    {"titulo":"el extranjero","autor":"albert camus","editorial":"atalaya","paginas":184,"stock":true},
+    {"titulo":"Las aventuras de Tom Sawyer","autor":"mark twain","editorial":"anaya","paginas":142,"stock":true}
+
+
+]
