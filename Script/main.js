@@ -57,11 +57,10 @@ const url = "DataBase.json"
         const emergenteEstanteriaUno = document.querySelector("#emergenteEstanteriaUno"); //ventana emergente de estanteria uno
         const cerrarEstanteriaUno = document.querySelector("#cerrarEstanteriaUno"); //boton para cerrar estanteria uno
         const estanteriaUno = document.querySelector("#estUno");//boton para abrir estanteria uno
-        let estanteriaText = document.querySelector("#estanteriaText");//texto dentro de la emergente estanteria uno
         //pestaña de administrador para cargar libros
-        const emergenteAdmin = document.querySelector("#emergenteAdmin");
-        const cerrarAdmin = document.querySelector("#cerrarAdmin");
-        const admin = document.querySelector("#admin");
+        const emergenteAdmin = document.querySelector("#emergenteAdmin"); //ventana emergente de administrador
+        const cerrarAdmin = document.querySelector("#cerrarAdmin"); //boton para cerrar administrador
+        const admin = document.querySelector("#admin"); //
         const botonCargar = document.querySelector("#botonCargar");
 
 
@@ -116,21 +115,18 @@ const registro = () => {
 
     const nuevoUser = new Usuario(nombreUser, mailUser, celuUser);
 
-    let arrayUsers = [];
-
     if(localStorage.getItem("usuarios") == null){
         usuarios.push(nuevoUser);
         localStorage.setItem("usuarios", JSON.stringify(usuarios));
     } else{
-        // arrayUsers.push(JSON.parse(localStorage.getItem("usuarios")));
-        arrayUsers.push(nuevoUser);
-        usuarios.push.apply(usuarios, arrayUsers);
-        localStorage.setItem("usuarios", JSON.stringify(usuarios));
+        const usuarioLS = JSON.parse(localStorage.getItem("usuarios"));
+        usuarioLS.push(nuevoUser);
+        localStorage.setItem("usuarios", JSON.stringify(usuarioLS));
     }
 }
 
 //funcion para guardar libros en el array estanterias 
-const guardarLibro = () => {
+const guardarLibro = async () => {
 
     const titulo = document.querySelector("#libroTitulo").value; //input
     const autor = document.querySelector("#libroAutor").value; //input
@@ -140,22 +136,35 @@ const guardarLibro = () => {
     const nuevoLibro = new Libro(titulo, autor, editorial, paginas); 
 
     estanterias.push(nuevoLibro);
+
+
+    //mover manualmente el "nuevoLibro" al db.json
 }
+
+
 //funcion para guardar datos del JSON en el array
 const librosJson = async () => {
     try {
-        let response = await fetch("database.json");
+        let response = await fetch('', {
+            method: "GET",
+            headers: {"Content-Type":"application/json"}
+        });
         let result = await response.json();
         console.log(result);
+        // fetch("db.json").then(response => response.json()).then(data => console.log(data));
         // estanterias.push(result)
     } catch(error) {
         console.log(error);
     }
 }
 
+
+
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
 const imprimir = () => {
-    if(localStorage.getItem("usuarios") != null || users != users){
+
+    document.querySelector("#selectUsuario").innerHTML = "";
+    if(localStorage.getItem("usuarios") != null){
         let users = JSON.parse(localStorage.getItem("usuarios"));
         users.forEach(obj => {
             document.querySelector("#selectUsuario").innerHTML += 
@@ -167,20 +176,43 @@ const imprimir = () => {
 }
 
 //funcion para imprimir los objetos del array en la ventanas "estanterias"
-const imprimirEstanterias = () => {
-    for (const libro of estanterias){
-        let nodo = document.createElement("div");
-        nodo.innerHTML = `
-        <h4>${libro.titulo}</h4>
-        <h5>${libro.autor}</h5>
-        <h6>${libro.editorial}</h6>
-        <h6>${libro.paginas}</h6>
-        <h6>${libro.stock}</h6>
-        <br>
-        `
+const imprimirEstanterias = async () => {
 
-        document.querySelector("#ventanaEstanteriaUno").appendChild(nodo);
+    document.querySelector("#listaLibros").innerHTML = "";
+
+    try{    
+        let nodo = document.createElement("div");
+        let response = await fetch("../db.json")
+        let result = await response.json()
+        result.forEach(libro => {
+            nodo.innerHTML += `
+            <h4>${libro.titulo}</h4>
+            <h5>${libro.autor}</h5>
+            <h6>${libro.editorial}</h6>
+            <h6>${libro.paginas}</h6>
+            <h6>${libro.stock}</h6>
+            <br>
+            `
+
+            document.querySelector("#listaLibros").appendChild(nodo);
+        })
+    }catch{
+        console.log("ola");
     }
+
+    // for (const libro of estanterias){
+    //     let nodo = document.createElement("div");
+    //     nodo.innerHTML = `
+    //     <h4>${libro.titulo}</h4>
+    //     <h5>${libro.autor}</h5>
+    //     <h6>${libro.editorial}</h6>
+    //     <h6>${libro.paginas}</h6>
+    //     <h6>${libro.stock}</h6>
+    //     <br>
+    //     `
+
+    //     document.querySelector("#ventanaEstanteriaUno").appendChild(nodo);
+    // }
 }
 
 
@@ -212,8 +244,6 @@ cerrarFiltro.onclick = () => {
 //botones que abren y que cierran el registro de usuario
 usuario.onclick = () => {
     emergenteUsuario.classList.add("mostrar");
-    //evento que imprime los usuarios en la ventana de prestamos
-    imprimir();
 }
 cerrarUsuario.onclick = () => {
     emergenteUsuario.classList.remove("mostrar");
@@ -228,6 +258,8 @@ cerrarMapa.onclick = () => {
 //botones que abren y cierran la ventana de prestamos
 prestamo.onclick = () => {
     emergentePrestamo.classList.add("mostrar");
+    //evento que imprime los usuarios en la ventana de prestamos
+    imprimir();
 }
 cerrarPrestamo.onclick = () => {
     emergentePrestamo.classList.remove("mostrar");
@@ -285,7 +317,7 @@ const emergente1 = (URL) => {
 //funcion asincronica para guardar datos en el json
 const guardarJson = async ()=> {
     try {
-        let response = await fetch("./DataBase.json",{
+        let response = await fetch("../db.json",{
             method: 'POST',
             body: JSON.stringify(estanterias),
             headers: {

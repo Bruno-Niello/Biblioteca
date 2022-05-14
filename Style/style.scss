@@ -51,6 +51,11 @@ body{
         left: 0;
         width: 100%;
         height: 100%;
+        overflow-y: scroll;
+        #ventanaEstanteriaUno{
+            overflow-y: scroll;
+            max-height: 800px;
+        }
         .ventana_emergente{
             background-color: white;
             width: 600px;
@@ -58,6 +63,7 @@ body{
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             text-align: center;
+           
             form{
                 input, select{
                     width: 100%;
@@ -81,6 +87,11 @@ body{
                         transition: .3s ease;
                         background-color: $color;
                         color:white;
+                    }
+                    &:active{
+                        background-color: white;
+                        color:$color;
+                        font-size: 115%;
                     }
                 }
                 .resultado{
@@ -269,8 +280,5 @@ body{
             }
         }
     }
-       
-    
-
 }
 
