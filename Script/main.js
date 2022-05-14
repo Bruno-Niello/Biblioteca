@@ -29,7 +29,7 @@ class Prestamo {
                 //  VARIABLES //
 
 //  "base de datos"
-const url = "DataBase.json"
+const url = "../db.json"
 
 //DOM
     //ventanas emergentes
@@ -67,9 +67,9 @@ const url = "DataBase.json"
                 //  FUNCIONES Y ARRAYS //
 
 //arrays principales
-const estanterias = [];
+const estanterias = []; //pushear esto en json
 const usuarios = [];
-const prestamos = [];
+const prestamos = []; //sin usar
 
 //filtros para la busqueda (necesito acomplejizarlos)
 const filtroLargo = estanterias.filter((el) => el.paginas > 200)
@@ -141,25 +141,6 @@ const guardarLibro = async () => {
     //mover manualmente el "nuevoLibro" al db.json
 }
 
-
-//funcion para guardar datos del JSON en el array
-const librosJson = async () => {
-    try {
-        let response = await fetch('', {
-            method: "GET",
-            headers: {"Content-Type":"application/json"}
-        });
-        let result = await response.json();
-        console.log(result);
-        // fetch("db.json").then(response => response.json()).then(data => console.log(data));
-        // estanterias.push(result)
-    } catch(error) {
-        console.log(error);
-    }
-}
-
-
-
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
 const imprimir = () => {
 
@@ -182,7 +163,7 @@ const imprimirEstanterias = async () => {
 
     try{    
         let nodo = document.createElement("div");
-        let response = await fetch("../db.json")
+        let response = await fetch(url)
         let result = await response.json()
         result.forEach(libro => {
             nodo.innerHTML += `
@@ -199,20 +180,6 @@ const imprimirEstanterias = async () => {
     }catch{
         console.log("ola");
     }
-
-    // for (const libro of estanterias){
-    //     let nodo = document.createElement("div");
-    //     nodo.innerHTML = `
-    //     <h4>${libro.titulo}</h4>
-    //     <h5>${libro.autor}</h5>
-    //     <h6>${libro.editorial}</h6>
-    //     <h6>${libro.paginas}</h6>
-    //     <h6>${libro.stock}</h6>
-    //     <br>
-    //     `
-
-    //     document.querySelector("#ventanaEstanteriaUno").appendChild(nodo);
-    // }
 }
 
 
@@ -287,6 +254,7 @@ botonCargar.onclick = (e) => {
     e.preventDefault();
     guardarLibro();
     formulario.reset();
+    Swal.fire("Libro Registrado");
 
 }
 
