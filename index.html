@@ -132,21 +132,24 @@
                         <li>
                             <h4>Seleccione su usuario</h4>
                             <select id="selectUsuario">
-                               <!-- aca imprime la funcion imprimir(); -->
+                               <!-- aca imprime la funcion imprimirUser(); -->
                             </select>
                         </li>
                         <br>
                         <li>
                             <h4>Seleccione la obra que desea pedir</h4>
-                            <select>
-                                <option value="obra">obra de prueba1</option>
-                                <option value="obra">obra de prueba2</option>
-                                <option value="obra">obra de prueba3</option>
+                            <select id="selectObras">
+                                <!-- aca imprime la funcion imprimirObra() -->
                             </select>
                         </li>
+                        <br>
                         <li>
-                            <h4>Seleccione la fecha que va a retirar la obra</h4>
-                            <select></select>
+                            <h4>Escriba el día y hora aproximada en la que retirara la obra</h4>
+                            <input type="text" name="fecha" id="fecha" placeholder="Escriba día y hora aproximada">
+                        </li>
+                        <br>
+                        <li>
+                            <button type="submit" id="botonPrestar">Solicitar prestamo</button>
                         </li>
                     </ul>
                 </form>

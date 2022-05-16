@@ -18,11 +18,11 @@ class Usuario {
 
 }
 class Prestamo {
-    constructor(titulo, nombre, fechaPrestamo, idPrestamo) {
-        // this.titulo = Libro.titulo; //no se como sacer info de otro array
-        // this.nombre = Usuario.nombre; //no se como sacer info de otro array
-        this.fechaPrestamo = new Date(); //revisar
-        idPrestamo = idPrestamo++; //ver como hacer una autonumeracion 
+    constructor(nombre, titulo, fechaPrestamo, idPrestamo) {
+        this.nombre = nombre;
+        this.titulo = titulo;  
+        this.fechaPrestamo = fechaPrestamo; 
+        idPrestamo = idPrestamo; 
     }
 }
 
@@ -30,6 +30,8 @@ class Prestamo {
 
 //  "base de datos"
 const url = "../db.json"
+//contraseña administrador
+const password = 2022;
 
 //DOM
     //ventanas emergentes
@@ -53,6 +55,7 @@ const url = "../db.json"
         const emergentePrestamo = document.querySelector("#emergentePrestamo");//ventana emergente de prestamos
         const cerrarPrestamo = document.querySelector("#cerrarPrestamo");//boton para cerrar prestamo
         const prestamo = document.querySelector("#prestamo");//boton para abrir prestamo
+        const botonPrestar = document.querySelector("#botonPrestar");//boton para solicitar el prestamo
         //estanterias
         const emergenteEstanteriaUno = document.querySelector("#emergenteEstanteriaUno"); //ventana emergente de estanteria uno
         const cerrarEstanteriaUno = document.querySelector("#cerrarEstanteriaUno"); //boton para cerrar estanteria uno
@@ -88,24 +91,53 @@ Swal.fire({
 });
 
 
-//funcion de busqueda
-const pregunta = () => {
+//funcion de filtrar libro
+const pregunta = async () => {
    
     const busqueda = document.querySelector("#buscadorFiltro").value;
     
-    if(busqueda == "largo"){
-        resultado.innerText = JSON.stringify(filtroLargo);
+    // if(busqueda == "largo"){
+    //     resultado.innerText = JSON.stringify(filtroLargo);
+    // }
+    // else if(busqueda == "corto"){
+    //     resultado.innerText = JSON.stringify(filtroCorto);
+    // }
+    // else if(busqueda == "catalogo"){
+    //     resultado.innerText = nombresLibros;
+    // }
+    // else{
+    //     resultado.innerText = "no escribio una palabra valida";
+    // }
+
+
+    try{
+        let response = await fetch(url);
+        let result = await response.json();
+        let newResult = result.titulo.includes(busqueda);
+        resultado.innerText = `${JSON.stringify(newResult)}`
+
+        // let buscar = result.find(e => {e.titulo == busqueda});
+        
+        
+        // if(buscar){
+        //     resultado.innerText = "este ejemplar SI encuentra en nuestra colección!"
+        // } else if(busqueda == ""){ 
+        //     resultado.innerText = "no se escribio nada"
+        // } else {
+        //     resultado.innerText = "este ejemplar NO se encuentra en nuestra colección!"
+        // }
+        
+    }catch{
+        console.log("error je");
     }
-    else if(busqueda == "corto"){
-        resultado.innerText = JSON.stringify(filtroCorto);
-    }
-    else if(busqueda == "catalogo"){
-        resultado.innerText = nombresLibros;
-    }
-    else{
-        resultado.innerText = "no escribio una palabra valida";
-    }
+
 }
+
+const datosJson = async () => {
+    
+}
+
+
 //funcion de registro de usuario y almacenamiento en el storage
 const registro = () => {
 
@@ -124,8 +156,30 @@ const registro = () => {
         localStorage.setItem("usuarios", JSON.stringify(usuarioLS));
     }
 }
+//funcion para realizar un prestamo 
+const prestar = () => {
 
-//funcion para guardar libros en el array estanterias 
+    const selectUser = document.querySelector("#selectUsuario");
+    const selectObras = document.querySelector("#selectObras");
+
+    const nombreUser = selectUser.options[selectUser.selectedIndex].text;
+    const tituloObra = selectObras.options[selectObras.selectedIndex].text;
+    const fecha = document.querySelector("#fecha").value;
+    const id = 1;
+
+    const nuevoPrestamo = new Prestamo(nombreUser, tituloObra, fecha, id);
+
+    prestamos.push(nuevoPrestamo);
+
+    Swal.fire(
+        'Prestamo solicitado!',
+        `Gracias ${nuevoPrestamo.nombre}, solicitaste la obra "${nuevoPrestamo.titulo}", para retirar ${nuevoPrestamo.fechaPrestamo}, nuestro bibliotecario guardara tu obra.`,
+        'success'
+      )
+
+}
+
+//funcion para guardar libros en el array estanterias... pero luego es necesario mover manualmente el "nuevoLibro" al db.json
 const guardarLibro = async () => {
 
     const titulo = document.querySelector("#libroTitulo").value; //input
@@ -136,13 +190,14 @@ const guardarLibro = async () => {
     const nuevoLibro = new Libro(titulo, autor, editorial, paginas); 
 
     estanterias.push(nuevoLibro);
+    console.log(JSON.stringify(nuevoLibro)); //tomar este console.log y pegarlo en el json
 
 
-    //mover manualmente el "nuevoLibro" al db.json
+    //
 }
 
 //funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
-const imprimir = () => {
+const imprimirUsers = () => {
 
     document.querySelector("#selectUsuario").innerHTML = "";
     if(localStorage.getItem("usuarios") != null){
@@ -156,14 +211,33 @@ const imprimir = () => {
     }
 }
 
-//funcion para imprimir los objetos del array en la ventanas "estanterias"
+//funcion para imprimir datos en la ventana de prestamo: toma los libros del json y los agrega como un select en prestamo
+const imprimirObras = async () => {
+
+    document.querySelector("#selectObras").innerHTML = "";
+
+    try{
+        let response = await fetch(url);
+        let result = await response.json();
+        result.forEach(libro => {
+            document.querySelector("#selectObras").innerHTML += `
+            <option value="obras">${libro.titulo}</option>`
+        })
+    }catch{
+        console.log("error je");
+    }
+}
+
+
+
+//funcion para imprimir los libros del JSON db (database) en la estanteria 1
 const imprimirEstanterias = async () => {
 
     document.querySelector("#listaLibros").innerHTML = "";
 
     try{    
         let nodo = document.createElement("div");
-        let response = await fetch(url)
+        let response = await fetch(url);
         let result = await response.json()
         result.forEach(libro => {
             nodo.innerHTML += `
@@ -178,14 +252,14 @@ const imprimirEstanterias = async () => {
             document.querySelector("#listaLibros").appendChild(nodo);
         })
     }catch{
-        console.log("ola");
+        console.log("error je");
     }
 }
 
 
                 //  EVENTOS // 
 
-//formulario
+//boton para registrar usuario
 botonRegistrar.addEventListener("submit", (e)=>{
     
     const formulario = document.querySelector("#formularioUsuario");
@@ -195,8 +269,14 @@ botonRegistrar.addEventListener("submit", (e)=>{
     formulario.reset();
     Swal.fire("Usuario Registrado")});
 
+//boton para solicitar prestamo
+botonPrestar.onclick = (e) => {
+    e.preventDefault();
+    prestar();
+}
+
 //boton que activa la busqueda en "filtrar libro"
-botonBuscar.onclick = (e)=>{
+botonBuscar.onclick = (e) => {
     e.preventDefault();
     pregunta();
 }
@@ -226,7 +306,8 @@ cerrarMapa.onclick = () => {
 prestamo.onclick = () => {
     emergentePrestamo.classList.add("mostrar");
     //evento que imprime los usuarios en la ventana de prestamos
-    imprimir();
+    imprimirUsers();
+    imprimirObras();
 }
 cerrarPrestamo.onclick = () => {
     emergentePrestamo.classList.remove("mostrar");
@@ -241,8 +322,24 @@ cerrarEstanteriaUno.onclick = () => {
     emergenteEstanteriaUno.classList.remove("mostrar");
 }
 //botones que abren y cierran la ventana de administrador
-admin.onclick = () => {
-    emergenteAdmin.classList.add("mostrar");
+admin.onclick = async () => {
+    
+    const { value: password } = await Swal.fire({
+        title: 'Para acceder ingrese la contraseña',
+        confirmButtonColor: "#031F4F",
+        confirmButtonText: "Entrar",
+        input: 'password',
+        inputPlaceholder: 'escriba aqui contraseña',
+        inputAttributes: {
+          maxlength: 10,
+          autocapitalize: 'off',
+          autocorrect: 'off'
+        }
+      })
+      
+      if (password == 2022) { 
+        emergenteAdmin.classList.add("mostrar");
+      } else { Swal.fire("Contraseña incorrecta!")}
 }
 cerrarAdmin.onclick = () => {
     emergenteAdmin.classList.remove("mostrar");
@@ -268,16 +365,7 @@ botonCargar.onclick = (e) => {
 
 // FUNCIONES EN CONSTRUCCION 
 
-//funcion para verificar datos en el storage 
-const verificar = () => {
-    let datos = [];
-    localStorage.getItem("usuarios") != null && (datos = JSON.parse(localStorage.getItem("usuarios"))); //operador AND  
-}
-//guardar datos en local storage
-const guardar = () => {
-    registro();
-    verificar() != undefined ? localStorage.setItem("usuarios", JSON.stringify(verificar())) : localStorage.setItem("usuarios", JSON.stringify(usuarios)); //operador ternario que examina el storage y almacena datos. 
-}
+
 //evento para abrir ventana emergente (sin uso todavia)
 const emergente1 = (URL) => {
     window.open(URL, "ventana", "width=500, height=300,scrollbars=NO")
