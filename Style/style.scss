@@ -63,7 +63,41 @@ body{
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             text-align: center;
-           
+            #prestamosImpresos{
+                overflow-y: scroll;
+                max-height: 800px;
+            }
+            .administracion{
+                height: 200px;
+                width: 600px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                button{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin: 50px;
+                    padding: 0 20px;
+                    height: 40px;
+                    line-height: 40px;
+                    border: 1px $color;
+                    color:$color;
+                    border-radius: 3px;
+                    border: solid 2px $color;
+                    cursor: pointer;
+                    &:hover{
+                        transition: .3s ease;
+                        background-color: $color;
+                        color:white;
+                    }
+                    &:active{
+                        background-color: white;
+                        color:$color;
+                        font-size: 115%;
+                    }
+                }
+            }
             form{
                 input, select{
                     width: 100%;

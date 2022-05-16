@@ -1,9 +1,14 @@
 [
-    {"titulo":"el principe","autor":"maquiavelo","editorial":"distal","paginas":138,"stock":true},
-    {"titulo":"la guerra de los mundos","autor":"h. g. wells","editorial":"terramar","paginas":235,"stock":true},
-    {"titulo":"Jauretche: medios y politica","autor":"pablo adrian vazquez","editorial":"copppal","paginas":246,"stock":true},
-    {"titulo":"la republica","autor":"platon","editorial":"gredos","paginas":600,"stock":true},
-    {"titulo":"el extranjero","autor":"albert camus","editorial":"atalaya","paginas":184,"stock":true},
-    {"titulo":"Las aventuras de Tom Sawyer","autor":"mark twain","editorial":"anaya","paginas":142,"stock":true}
-
+    {"titulo":"El Principe","autor":"Maquiavelo","editorial":"Distal","paginas":138,"stock":true},
+    {"titulo":"La guerra de los mundos","autor":"H. G. Wells","editorial":"Terramar","paginas":235,"stock":true},
+    {"titulo":"Jauretche: medios y politica","autor":"Pablo Adrian Vazquez","editorial":"copppal","paginas":246,"stock":true},
+    {"titulo":"La Republica","autor":"Platon","editorial":"Gredos","paginas":600,"stock":true},
+    {"titulo":"El Extranjero","autor":"Albert Camus","editorial":"Atalaya","paginas":184,"stock":true},
+    {"titulo":"Las aventuras de Tom Sawyer","autor":"Mark Twain","editorial":"Anaya","paginas":142,"stock":true},
+    {"titulo":"El libro de arena","autor":"Jorge Luis Borges","editorial":"Emecé","paginas":"188","stock":true},
+    {"titulo":"La Patagonia rebelde","autor":"Osvaldo Bayer","editorial":"Booket","paginas":"509","stock":true},
+    {"titulo":"Yo, robot","autor":"Isaac Asimov","editorial":"Edhasa","paginas":"375","stock":true},
+    {"titulo":"Facundo","autor":"Domingo Faustino Sarmiento","editorial":"Penguin","paginas":"285","stock":true},
+    {"titulo":"Crítica de la razón pura","autor":"Immanuel Kant","editorial":"Colihue","paginas":"927","stock":true},
+    {"titulo":"El conde de Montecristo","autor":"Alejandro Dumas Jr","editorial":"Libertador","paginas":"847","stock":true}
 ]

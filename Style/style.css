@@ -115,6 +115,59 @@ body {
   text-align: center;
 }
 
+.grid-container .ventanas .ventana_emergente #prestamosImpresos {
+  overflow-y: scroll;
+  max-height: 800px;
+}
+
+.grid-container .ventanas .ventana_emergente .administracion {
+  height: 200px;
+  width: 600px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.grid-container .ventanas .ventana_emergente .administracion button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 50px;
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  border: 1px #031F4F;
+  color: #031F4F;
+  border-radius: 3px;
+  border: solid 2px #031F4F;
+  cursor: pointer;
+}
+
+.grid-container .ventanas .ventana_emergente .administracion button:hover {
+  -webkit-transition: .3s ease;
+  transition: .3s ease;
+  background-color: #031F4F;
+  color: white;
+}
+
+.grid-container .ventanas .ventana_emergente .administracion button:active {
+  background-color: white;
+  color: #031F4F;
+  font-size: 115%;
+}
+
 .grid-container .ventanas .ventana_emergente form input, .grid-container .ventanas .ventana_emergente form select {
   width: 100%;
   margin: 10px;

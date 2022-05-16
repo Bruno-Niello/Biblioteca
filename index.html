@@ -17,11 +17,13 @@
 </head>
 <body>
     <div class="grid-container">
-        <header class="encabezado"> <!-- encabezado -->
+        <!-- encabezado -->
+        <header class="encabezado"> 
             <img src="Media/logo.jpg" id="logo">
             <h1 class="titulo_biblioteca"> Biblioteca Popular Yolanda Ponti</h1>
         </header>
-        <article class="main"> <!-- cuerpo de la pagina -->
+        <!-- cuerpo de la pagina -->
+        <article class="main"> 
             <section class="seccion1"> 
                 <h3 id="explorar">Explorar Biblioteca</h3>
                 <span class="estanteria" id="estUno">Estanteria 1</span>
@@ -38,6 +40,8 @@
                 <p id="instrucciones">Encargue un libro en 3 simples pasos!: <br><br> Registre un Usuario <b>(1)</b>, <br>Solicite el libro que desea <b>(2)</b> y <br>Vea nuestra ubicacion para retirarlo! <b>(3)</b></p>
             </section>
         </article>
+        <!-- VENTANAS MODALES -->
+        <!-- ventana modal de estanteria 1 -->
         <div class="ventanas" id="emergenteEstanteriaUno">
             <div class="ventana_emergente" id="ventanaEstanteriaUno">
                 <div id="listaLibros">
@@ -46,6 +50,7 @@
                 <button class="cerrar" id="cerrarEstanteriaUno">cerrar</button>
             </div>
         </div>
+        <!-- ventana modal de filtrar libro -->
         <div class="ventanas" id="emergenteFiltro">
             <div class="ventana_emergente">
                 <form class="formularioFiltro" id="formularioFiltro">
@@ -69,6 +74,7 @@
                 <button class="cerrar" id="cerrarFiltro">cerrar</button>
             </div>
         </div>
+        <!-- ventana modal de registrar usuario -->
         <div class="ventanas" id="emergenteUsuario">
             <div class="ventana_emergente">
                 <form class="formularioUsuario" id="formularioUsuario">
@@ -98,6 +104,7 @@
                 <button class="cerrar" id="cerrarUsuario">cerrar</button>
             </div>
         </div>
+        <!-- ventana modal de mostrar ubicacion -->
         <div class="ventanas" id="emergenteMapa">
             <div class="ventana_emergente" id="ventana_emergente_mapa">
                 <form class="formularioMapa" id="formularioMapa">
@@ -121,6 +128,7 @@
                 <button class="cerrar" id="cerrarMapa">cerrar</button>
             </div>
         </div>
+        <!-- ventana modal de solicitar prestamo -->
         <div class="ventanas" id="emergentePrestamo">
             <div class="ventana_emergente">
                 <form class="formularioPrestamo" id="formularioPrestamo">
@@ -157,6 +165,26 @@
                 <button class="cerrar" id="cerrarPrestamo">cerrar</button>
             </div>
         </div>
+        <!-- ventana modal de administrador -->
+        <div class="ventanas" id="emergenteAdministrador">
+            <div class="ventana_emergente">
+                <div class="administracion">
+                    <button id="cargarLibro">Cargar Libros</button>
+                    <button id="verPrestamo">Ver Prestamos</button>
+                </div>
+                <button class="cerrar" id="cerrarAdministrador">cerrar</button>
+            </div>
+        </div>
+        <!-- ventana modal para ver los prestamos en administrador -->
+        <div class="ventanas" id="emergenteVerPrestamo">
+            <div class="ventana_emergente">
+                <div id="prestamosImpresos">
+                    
+                </div>
+                <button class="cerrar" id="cerrarVerPrestamo">cerrar</button>
+            </div>
+        </div>
+        <!-- ventana modal para cargar libros a la base de datos desde administrador -->
         <div class="ventanas" id="emergenteAdmin">
             <div class="ventana_emergente">
                 <form class="formularioLibro" id="formularioLibro">
@@ -190,7 +218,8 @@
                 <button class="cerrar" id="cerrarAdmin">cerrar</button>
             </div>
         </div>
-        <footer class="pie"> <!-- pie de pagina -->
+        <!-- pie de pagina -->
+        <footer class="pie"> 
             <div class="evita">
                 <h2 id="evita_name">Movimiento Evita</h2>
                 <a target="_blank" href="https://twitter.com/MovimientoEvita">

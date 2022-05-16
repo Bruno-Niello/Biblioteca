@@ -60,11 +60,20 @@ const password = 2022;
         const emergenteEstanteriaUno = document.querySelector("#emergenteEstanteriaUno"); //ventana emergente de estanteria uno
         const cerrarEstanteriaUno = document.querySelector("#cerrarEstanteriaUno"); //boton para cerrar estanteria uno
         const estanteriaUno = document.querySelector("#estUno");//boton para abrir estanteria uno
+        //pestaña administrador
+        const emergenteAdministrador = document.querySelector("#emergenteAdministrador"); //ventana emergente de administrador
+        const cerrarAdministrador = document.querySelector("#cerrarAdministrador"); //boton para cerrar la ventana de administrador
+        const admin = document.querySelector("#admin"); //boton que abre la ventana de administrador
+        const cargarLibro = document.querySelector("#cargarLibro");//boton para abrir la carga de libros
+        const verPrestamo = document.querySelector("#verPrestamo");//boton para ver prestamos
         //pestaña de administrador para cargar libros
-        const emergenteAdmin = document.querySelector("#emergenteAdmin"); //ventana emergente de administrador
-        const cerrarAdmin = document.querySelector("#cerrarAdmin"); //boton para cerrar administrador
-        const admin = document.querySelector("#admin"); //
-        const botonCargar = document.querySelector("#botonCargar");
+        const emergenteAdmin = document.querySelector("#emergenteAdmin"); //ventana emergente para cargar libros
+        const cerrarAdmin = document.querySelector("#cerrarAdmin"); //boton para cerrar la carga de libros 
+        const botonCargar = document.querySelector("#botonCargar"); //boton que submitea el formulario de carga de libros
+        //pestaña de ver prestamos
+        const emergenteVerPrestamo = document.querySelector("#emergenteVerPrestamo");//ventana para ver prestamos
+        const cerrarVerPrestamo = document.querySelector("#cerrarVerPrestamo");//boton para cerrar la ventana de ver prestamos
+
 
 
                 //  FUNCIONES Y ARRAYS //
@@ -72,7 +81,7 @@ const password = 2022;
 //arrays principales
 const estanterias = []; //pushear esto en json
 const usuarios = [];
-const prestamos = []; //sin usar
+const prestamos = []; 
 
 //filtros para la busqueda (necesito acomplejizarlos)
 const filtroLargo = estanterias.filter((el) => el.paginas > 200)
@@ -133,11 +142,6 @@ const pregunta = async () => {
 
 }
 
-const datosJson = async () => {
-    
-}
-
-
 //funcion de registro de usuario y almacenamiento en el storage
 const registro = () => {
 
@@ -156,20 +160,28 @@ const registro = () => {
         localStorage.setItem("usuarios", JSON.stringify(usuarioLS));
     }
 }
+
 //funcion para realizar un prestamo 
 const prestar = () => {
 
     const selectUser = document.querySelector("#selectUsuario");
     const selectObras = document.querySelector("#selectObras");
 
-    const nombreUser = selectUser.options[selectUser.selectedIndex].text;
-    const tituloObra = selectObras.options[selectObras.selectedIndex].text;
-    const fecha = document.querySelector("#fecha").value;
-    const id = 1;
+    const nombreUser = selectUser.options[selectUser.selectedIndex].text;  //lee el value del option seleccionado del selector
+    const tituloObra = selectObras.options[selectObras.selectedIndex].text; //lee el value del option seleccionado del selector
+    const fecha = document.querySelector("#fecha").value; //input
+    const id = 1; //falta hacer una autonumeracion para cada prestamo
 
     const nuevoPrestamo = new Prestamo(nombreUser, tituloObra, fecha, id);
 
-    prestamos.push(nuevoPrestamo);
+    if(localStorage.getItem("prestamos") == null){
+        prestamos.push(nuevoPrestamo);
+        localStorage.setItem("prestamos", JSON.stringify(prestamos));
+    } else{
+        const prestamoLS = JSON.parse(localStorage.getItem("prestamos"));
+        prestamoLS.push(nuevoPrestamo);
+        localStorage.setItem("prestamos", JSON.stringify(prestamoLS));
+    }
 
     Swal.fire(
         'Prestamo solicitado!',
@@ -196,7 +208,7 @@ const guardarLibro = async () => {
     //
 }
 
-//funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select en prestamo
+//funcion para imprimir datos en la ventana de prestamo: toma los usuarios registrados y los agrega como un select
 const imprimirUsers = () => {
 
     document.querySelector("#selectUsuario").innerHTML = "";
@@ -227,7 +239,27 @@ const imprimirObras = async () => {
         console.log("error je");
     }
 }
+//funcion que imprime el array prestamos en la ventana ver prestamos de administrador
+const imprimirVerPrestamo = () => {
 
+    document.querySelector("#prestamosImpresos").innerHTML = "";
+
+    if(localStorage.getItem("prestamos") != null){
+        let prestamo = JSON.parse(localStorage.getItem("prestamos"));
+        prestamo.forEach(obj => {
+            document.querySelector("#prestamosImpresos").innerHTML += 
+            `
+            <div>
+                <h3>${obj.nombre}</h3>
+                <h4>${obj.titulo}</h4>
+                <h5>${obj.fechaPrestamo}</h5>
+            </div>
+            <br>
+            <hr>
+            `
+        })
+    }
+}
 
 
 //funcion para imprimir los libros del JSON db (database) en la estanteria 1
@@ -241,12 +273,14 @@ const imprimirEstanterias = async () => {
         let result = await response.json()
         result.forEach(libro => {
             nodo.innerHTML += `
-            <h4>${libro.titulo}</h4>
-            <h5>${libro.autor}</h5>
-            <h6>${libro.editorial}</h6>
-            <h6>${libro.paginas}</h6>
-            <h6>${libro.stock}</h6>
+            <h3>${libro.titulo}</h3>
+            <h4>autor: ${libro.autor}</h4>
             <br>
+            <h5>editorial: ${libro.editorial}</h5>
+            <h6>cantidad de páginas: ${libro.paginas}</h6>
+            <h6>stock: ${libro.stock}</h6>
+            <br>
+            <hr>
             `
 
             document.querySelector("#listaLibros").appendChild(nodo);
@@ -305,7 +339,7 @@ cerrarMapa.onclick = () => {
 //botones que abren y cierran la ventana de prestamos
 prestamo.onclick = () => {
     emergentePrestamo.classList.add("mostrar");
-    //evento que imprime los usuarios en la ventana de prestamos
+    //evento que imprime los usuarios y los libros en la ventana de prestamos
     imprimirUsers();
     imprimirObras();
 }
@@ -338,8 +372,15 @@ admin.onclick = async () => {
       })
       
       if (password == 2022) { 
-        emergenteAdmin.classList.add("mostrar");
+        emergenteAdministrador.classList.add("mostrar");
       } else { Swal.fire("Contraseña incorrecta!")}
+}
+cerrarAdministrador.onclick = () => {
+    emergenteAdministrador.classList.remove("mostrar");
+}
+//botones que abren y cierran la ventana de carga de libros de administrador
+cargarLibro.onclick = () => {
+    emergenteAdmin.classList.add("mostrar");
 }
 cerrarAdmin.onclick = () => {
     emergenteAdmin.classList.remove("mostrar");
@@ -352,7 +393,15 @@ botonCargar.onclick = (e) => {
     guardarLibro();
     formulario.reset();
     Swal.fire("Libro Registrado");
-
+}
+//botones que abren y cierra la ventana de ver prestamos de administrador
+verPrestamo.onclick = () => {
+    emergenteVerPrestamo.classList.add("mostrar");
+    //evento que imprime los prestamos
+    imprimirVerPrestamo();
+}
+cerrarVerPrestamo.onclick = () => {
+    emergenteVerPrestamo.classList.remove("mostrar");
 }
 
 
