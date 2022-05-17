@@ -105,20 +105,6 @@ const pregunta = async () => {
    
     const busqueda = document.querySelector("#buscadorFiltro").value;
     
-    // if(busqueda == "largo"){
-    //     resultado.innerText = JSON.stringify(filtroLargo);
-    // }
-    // else if(busqueda == "corto"){
-    //     resultado.innerText = JSON.stringify(filtroCorto);
-    // }
-    // else if(busqueda == "catalogo"){
-    //     resultado.innerText = nombresLibros;
-    // }
-    // else{
-    //     resultado.innerText = "no escribio una palabra valida";
-    // }
-
-
     try{
         let response = await fetch(url);
         let result = await response.json();
@@ -132,7 +118,6 @@ const pregunta = async () => {
     }catch{
         console.log("error je");
     }
-
 }
 
 //funcion de registro de usuario y almacenamiento en el storage
