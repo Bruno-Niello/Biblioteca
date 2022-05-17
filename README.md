@@ -23,8 +23,10 @@ La app cuenta con las siguientes funcionalidades:
   4- Solicitar prestamo, aquí con el usuario guardado podras realizar el pedido de prestamo de los libros existentes en el .json local. 
   
   5- VENTANA ADMINISTRADOR -- PASSWORD: 2022
+  
     5.1- Cargar libros, con este formulario podemos cargar libros que se guardaran en un array y nos arrojara un json a la consola.
     Este json debemos moverlo manualmente al .json local. 
+    
     5.2- Ver prestamos, desde esta ventana modular el bibliotecario podra ver impresos los prestamos realizados en la pagina. 
     
 
@@ -32,4 +34,5 @@ La app cuenta con las siguientes funcionalidades:
   
 -Cambiar el .json local por una base de datos. Esto es fundamental para corregir la funcionalidad de cargar libros, registrar usuarios y realizar prestamos.
 Sin una base de datos de los libros, usuarios y prestamos la página no va a tener un uso real.
+
 -Arreglar el filtro. El filtro quedo mediocre con respecto al resto de la página pero hubo dificultades a la hora de poder arreglarlo, queda pendiente. 
