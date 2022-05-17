@@ -122,19 +122,12 @@ const pregunta = async () => {
     try{
         let response = await fetch(url);
         let result = await response.json();
-        let newResult = result.titulo.includes(busqueda);
-        resultado.innerText = `${JSON.stringify(newResult)}`
+        let libroFiltrado = result.filter(result => result.titulo == busqueda);
 
-        // let buscar = result.find(e => {e.titulo == busqueda});
-        
-        
-        // if(buscar){
-        //     resultado.innerText = "este ejemplar SI encuentra en nuestra colección!"
-        // } else if(busqueda == ""){ 
-        //     resultado.innerText = "no se escribio nada"
-        // } else {
-        //     resultado.innerText = "este ejemplar NO se encuentra en nuestra colección!"
-        // }
+
+        resultado.innerHTML = `
+            ${JSON.stringify(libroFiltrado)}
+        `
         
     }catch{
         console.log("error je");
