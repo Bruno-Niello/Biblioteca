@@ -59,7 +59,7 @@
                             <h2>Que libro desea buscar?</h2>
                         </li>
                         <li>
-                            <input type="search" name="libro" id="buscadorFiltro" placeholder="Titulo de la obra">
+                            <input type="search" name="libro" id="buscadorFiltro" placeholder="Titulo de la obra" required> 
                             <label for="buscadorFiltro">Escriba el nombre la obra que desee comprobar. Nuestro buscar distingue mayusculas y/o espacios.</label>
                         </li>
                         <li>
@@ -85,15 +85,15 @@
                         <br><br>
                         <li>
                             <h4>Nombre y apellido</h4>
-                            <input type="text" name="nombre" id="nombreUser" placeholder="nombre apellido">
+                            <input type="text" name="nombre" id="nombreUser" placeholder="nombre apellido" required>
                         </li>
                         <li>
                             <h4>Correo electronico</h4>
-                            <input type="text" name="mail" id="mailUser" placeholder="nombremail@ejemplo.com">
+                            <input type="email" name="mail" id="mailUser" placeholder="nombremail@ejemplo.com">
                         </li>
                         <li>
                             <h4>Numero de telefono</h4>
-                            <input name="celuUser" id="celuUser" placeholder="numero con codigo de area sin 0 ni 15">
+                            <input type="tel" name="celuUser" id="celuUser" placeholder="numero con codigo de area sin 0 ni 15" required>
                         </li>
                         <li>
                             <button type="submit" id="botonRegistrar">Registrar</button>
@@ -139,21 +139,21 @@
                         <br><br>
                         <li>
                             <h4>Seleccione su usuario</h4>
-                            <select id="selectUsuario">
+                            <select id="selectUsuario" required>
                                <!-- aca imprime la funcion imprimirUser(); -->
                             </select>
                         </li>
                         <br>
                         <li>
                             <h4>Seleccione la obra que desea pedir</h4>
-                            <select id="selectObras">
+                            <select id="selectObras" required>
                                 <!-- aca imprime la funcion imprimirObra() -->
                             </select>
                         </li>
                         <br>
                         <li>
                             <h4>Seleccione la fecha para retirar</h4>
-                            <input type="date" name="fecha" id="fecha" placeholder="Escriba día y hora aproximada">
+                            <input type="date" name="fecha" id="fecha" placeholder="Escriba día y hora aproximada" required>
                         </li>
                         <br>
                         <li>
@@ -195,7 +195,7 @@
                         <br><br>
                         <li>
                             <h4>Titulo</h4>
-                            <input type="text" name="titulo" id="libroTitulo" placeholder="titulo de la obra">
+                            <input type="text" name="titulo" id="libroTitulo" placeholder="titulo de la obra" required>
                         </li>
                         <li>
                             <h4>Autor</h4>
@@ -207,7 +207,7 @@
                         </li>
                         <li>
                             <h4>Páginas</h4>
-                            <input name="paginas" id="libroPaginas" placeholder="numero de paginas">
+                            <input type="number" name="paginas" id="libroPaginas" placeholder="numero de paginas">
                         </li>
                         <li>
                             <button type="submit" id="botonCargar">Cargar Libro</button>
